@@ -29,23 +29,44 @@ public class JavaLongObjectInspector extends
     super(PrimitiveObjectInspectorUtils.longTypeEntry);
   }
 
+  /**
+   * Method to do a safety check and promotion in case of integer
+   * @param o
+   * @return
+   */
+  private Long getSafeLong(Object o) {
+  	if (o == null) {
+  	  return null;
+  	}
+
+  	// if this is an integer attempt to promote it
+  	Long l = null;
+  	if (o instanceof Integer) {
+  	  l = new Long(((Integer) o).intValue());
+  	} else {
+  	  l = (Long)o;
+  	}
+
+  	return l;
+  }
+
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new LongWritable(((Long) o).longValue());
+  	return o == null ? null : new LongWritable(getSafeLong(o));
   }
 
   @Override
   public long get(Object o) {
-    return ((Long) o).longValue();
+  	return getSafeLong(o);
   }
 
   @Override
   public Object create(long value) {
-    return Long.valueOf(value);
+  	return Long.valueOf(value);
   }
 
   @Override
   public Object set(Object o, long value) {
-    return Long.valueOf(value);
+  	return Long.valueOf(value);
   }
 }

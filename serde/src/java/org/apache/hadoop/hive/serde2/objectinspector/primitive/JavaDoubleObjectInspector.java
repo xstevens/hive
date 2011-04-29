@@ -30,14 +30,30 @@ public class JavaDoubleObjectInspector extends
     super(PrimitiveObjectInspectorUtils.doubleTypeEntry);
   }
 
+  private Double getSafeDouble(Object o) {
+    if (o == null) {
+      return null;
+    }
+      
+    Double d = null;
+    // if this is a float attempt to promote it
+    if (o instanceof Float) {
+      d = new Double(((Float)o).floatValue());
+    } else {
+      d = (Double)o;
+    }
+      
+    return d;
+  }
+  
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new DoubleWritable(((Double) o).doubleValue());
+    return o == null ? null : new DoubleWritable(getSafeDouble(o));
   }
 
   @Override
   public double get(Object o) {
-    return ((Double) o).doubleValue();
+    return getSafeDouble(o);
   }
 
   @Override
