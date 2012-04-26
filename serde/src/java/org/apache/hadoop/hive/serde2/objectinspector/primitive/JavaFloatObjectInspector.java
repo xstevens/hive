@@ -32,12 +32,12 @@ public class JavaFloatObjectInspector extends
 
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new FloatWritable(((Float) o).floatValue());
+    return o == null ? null : new FloatWritable(((Number) o).floatValue());
   }
 
   @Override
   public float get(Object o) {
-    return ((Float) o).floatValue();
+    return ((Number) o).floatValue();
   }
 
   @Override

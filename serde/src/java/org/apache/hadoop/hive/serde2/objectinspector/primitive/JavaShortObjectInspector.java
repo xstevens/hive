@@ -32,12 +32,12 @@ public class JavaShortObjectInspector extends
 
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new ShortWritable(((Short) o).shortValue());
+    return o == null ? null : new ShortWritable(((Number)o).shortValue());
   }
 
   @Override
   public short get(Object o) {
-    return ((Short) o).shortValue();
+    return ((Number) o).shortValue();
   }
 
   @Override

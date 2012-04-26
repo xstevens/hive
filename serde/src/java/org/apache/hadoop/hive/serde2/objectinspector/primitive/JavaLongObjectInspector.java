@@ -31,12 +31,12 @@ public class JavaLongObjectInspector extends
 
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new LongWritable(((Long) o).longValue());
+    return o == null ? null : new LongWritable(((Number) o).longValue());
   }
 
   @Override
   public long get(Object o) {
-    return ((Long) o).longValue();
+    return ((Number) o).longValue();
   }
 
   @Override

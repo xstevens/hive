@@ -31,12 +31,12 @@ public class JavaIntObjectInspector extends
 
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new IntWritable(((Integer) o).intValue());
+    return o == null ? null : new IntWritable(((Number) o).intValue());
   }
 
   @Override
   public int get(Object o) {
-    return ((Integer) o).intValue();
+    return ((Number) o).intValue();
   }
 
   @Override

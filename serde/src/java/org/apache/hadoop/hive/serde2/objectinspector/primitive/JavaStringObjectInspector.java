@@ -30,14 +30,29 @@ public class JavaStringObjectInspector extends
     super(PrimitiveObjectInspectorUtils.stringTypeEntry);
   }
 
+  private String getSafeString(Object o) {
+    if (o == null) {
+      return null;
+    }
+
+    String s = null;
+    if (o instanceof String) {
+      s = (String)o;
+    } else {
+      s = String.valueOf(o);
+    }
+
+    return s;
+  }
+  
   @Override
   public Text getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new Text(((String) o));
+    return o == null ? null : new Text(getSafeString(o));
   }
-
+  
   @Override
   public String getPrimitiveJavaObject(Object o) {
-    return (String) o;
+    return getSafeString(o);
   }
 
   @Override

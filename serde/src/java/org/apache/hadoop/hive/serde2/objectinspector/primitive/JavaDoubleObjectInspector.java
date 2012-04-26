@@ -32,12 +32,12 @@ public class JavaDoubleObjectInspector extends
 
   @Override
   public Object getPrimitiveWritableObject(Object o) {
-    return o == null ? null : new DoubleWritable(((Double) o).doubleValue());
+    return o == null ? null : new DoubleWritable(((Number) o).doubleValue());
   }
 
   @Override
   public double get(Object o) {
-    return ((Double) o).doubleValue();
+    return ((Number) o).doubleValue();
   }
 
   @Override
